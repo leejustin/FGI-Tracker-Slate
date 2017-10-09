@@ -6,6 +6,45 @@ We have language bindings in Shell, Ruby, and Python! You can view code examples
 
 This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
+
+# Records
+
+A record represents the value of the Fear Greed Index for a given date.
+
+Dates are represented with the format:
+`yyyy-mm-dd`
+
+<aside class="notice">
+Data is available starting from when the FGI-Tracker began collecting data. If no record exists for a given date, <code>null</code> will be returned for the value.
+</aside>
+
+## Get a List of Records
+
+This endpoint returns a list of FGI records in the provided date range.
+
+### HTTP Request
+
+`GET http://example.com/api/fgi/records`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+start | false | The lower bound of the date range.
+end | false| The upper bound of the date range.
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+## Get a Specific Record
+
+This endpoint returns the FGI record for given date.
+
+### HTTP Request
+
+`GET http://example.com/api/fgi/records/{date}`
+
 # Authentication
 
 > To authorize, use this code:
