@@ -1,11 +1,22 @@
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Fear Greed Index* (FGI) API! 
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+The [Fear and Greed Index](http://money.cnn.com/data/fear-and-greed/) is an investment tool by [CNN Money](money.cnn.com) used to measure the emotions driving the market.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This API can be used to retrieve the values of the Fear and Greed Index for a given date.  The value is an integer from 0 to 100 (inclusive) and is updated several times a day until the market closes.
 
+For the most up-to-date data for the current day, please use refer to CNN's tool directly.  This API does not serve as a replacement for CNN's Fear and Greed Index website.
+
+<sub>* The Fear and Greed Index are trademarks™ or registered® trademarks of CNN Money. Use of them does not imply any affiliation with or endorsement by them.<sub>
+
+# Authentication
+
+The API will be secured with an API key.  As it is still under development, the API can currently be accessed without an API key.
+
+<aside class="warning">
+Requests will stop working when the API key authentication is implemented.
+</aside>
 
 # Records
 
@@ -20,11 +31,34 @@ Data is available starting from when the FGI-Tracker began collecting data. If n
 
 ## Get a List of Records
 
+```bash
+curl "https://fear-and-greed.leejustin.com/api/fgi/records?start=2017-09-20&end=2017-09-22"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[  
+   {  
+      "date":"2017-09-20",
+      "value":79
+   },
+   {  
+      "date":"2017-09-21",
+      "value":73
+   },
+   {  
+      "date":"2017-09-22",
+      "value":71
+   }
+]
+```
+
 This endpoint returns a list of FGI records in the provided date range.
 
 ### HTTP Request
 
-`GET http://example.com/api/fgi/records`
+`GET https://fear-and-greed.leejustin.com/api/fgi/records`
 
 ### Query Parameters
 
@@ -34,175 +68,26 @@ start | false | The lower bound of the date range.
 end | false| The upper bound of the date range.
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — the `start` and `end` should be formatted per the `Records` date format!
 </aside>
 
 ## Get a Specific Record
 
-This endpoint returns the FGI record for given date.
-
-### HTTP Request
-
-`GET http://example.com/api/fgi/records/{date}`
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```bash
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```bash
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```bash
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl "https://fear-and-greed.leejustin.com/api/fgi/records/2017-10-4"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "date":"2017-10-04",
+  "value":91
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint returns the FGI record for given date.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+`GET https://fear-and-greed.leejustin.com/api/fgi/records/{date}`
