@@ -31,7 +31,7 @@ Data is available starting from when the FGI-Tracker began collecting data. If n
 
 ## Get a List of Records
 
-```bash
+```shell
 curl "https://fear-and-greed.leejustin.com/api/fgi/records?start=2017-09-20&end=2017-09-22"
 ```
 
@@ -73,7 +73,7 @@ Remember — the `start` and `end` should be formatted per the `Records` date fo
 
 ## Get a Specific Record
 
-```bash
+```shell
 curl "https://fear-and-greed.leejustin.com/api/fgi/records/2017-10-4"
 ```
 
