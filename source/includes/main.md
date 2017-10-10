@@ -1,14 +1,20 @@
 # Introduction
 
-Welcome to the Fear Greed Index* (FGI) API! 
+## Fear and Greed Index
+The [Fear and Greed Index](http://money.cnn.com/data/fear-and-greed/) is an investment tool by [CNN Money](money.cnn.com) used to measure the emotions driving the market.  It uses various market indicators to report a value representing investor sentiment.  Lower values indicate fear (Bear Market) while higher values indicate greed (Bull Market).  This can help predict when the market may swing in a given direction.
 
-The [Fear and Greed Index](http://money.cnn.com/data/fear-and-greed/) is an investment tool by [CNN Money](money.cnn.com) used to measure the emotions driving the market.
+<sub>* The Fear and Greed Index are trademarks™ or registered® trademarks of CNN Money. Use of them does not imply any affiliation with or endorsement by them.<sub>
 
+## The FGI API
 This API can be used to retrieve the values of the Fear and Greed Index for a given date.  The value is an integer from 0 to 100 (inclusive) and is updated several times a day until the market closes.
 
 For the most up-to-date data for the current day, please use refer to CNN's tool directly.  This API does not serve as a replacement for CNN's Fear and Greed Index website.
 
-<sub>* The Fear and Greed Index are trademarks™ or registered® trademarks of CNN Money. Use of them does not imply any affiliation with or endorsement by them.<sub>
+If anything is missing or seems incorrect, please check the [Github issues](https://github.com/leejustin/FGI-Tracker/issues) for existing known issues or [create a new issue](https://github.com/leejustin/FGI-Tracker/issues/new).
+
+<aside class="warning">
+This API is still in beta and may change without user notice.  The [Github Repository](https://github.com/leejustin/FGI-Tracker) will have the most recent updates!
+</aside>
 
 # Authentication
 
