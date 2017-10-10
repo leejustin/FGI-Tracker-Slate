@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>FGI API Reference</title>
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <link href="stylesheets/highlight-obsidian.css" rel="stylesheet" type="text/css" media="screen, print" />
+    <script src="javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body class="" data-languages="[&#34;shell&#34;]">
+    <a href="#" id="nav-button">
+      <span> NAV
+        <img alt="undefined" class="undefined" src="images/navbar.png"> </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img alt="undefined" class="undefined" src="images/logo.png">
+      <div class="lang-selector">
+        <a href="#" data-language-name="shell">shell</a>
+      </div>
+      <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search"> </div>
+      <ul class="search-results"></ul>
+      <div id="toc"> </div>
+      <ul class="toc-footer">
+        <li>
+          <a href='http://money.cnn.com/data/fear-and-greed/'>CNN's Fear and Greed Index</a>
+        </li>
+        <li>
+          <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+        </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+        <h2 id="fear-and-greed-index">Fear and Greed Index</h2>
+        <p>The
+          <a href="http://money.cnn.com/data/fear-and-greed/">Fear and Greed Index</a> is an investment tool by
+          <a href="money.cnn.com">CNN Money</a> used to measure the emotions driving the market. It uses various market indicators to report a value representing investor sentiment. Lower values indicate fear (Bear Market) while higher values indicate greed (Bull Market). This
+          can help predict when the market may swing in a given direction.</p>
+        <p>
+          <sub>* The Fear and Greed Index are trademarks™ or registered® trademarks of CNN Money. Use of them does not imply any affiliation with or endorsement by them.
+            <sub>
+        </p>
+        <h2 id="the-fgi-api">The FGI API</h2>
+        <p>This API can be used to retrieve the values of the Fear and Greed Index for a given date. The value is an integer from 0 to 100 (inclusive) and is updated several times a day until the market closes.</p>
+        <p>For the most up-to-date data for the current day, please use refer to CNN&#39;s tool directly. This API does not serve as a replacement for CNN&#39;s Fear and Greed Index website.</p>
+        <p>If anything is missing or seems incorrect, please check the
+          <a href="https://github.com/leejustin/FGI-Tracker/issues">Github issues</a> for existing known issues or
+          <a href="https://github.com/leejustin/FGI-Tracker/issues/new">create a new issue</a>.</p>
+        <aside class="warning"> This API is still in beta and may change without user notice. The
+          <a href="https://github.com/leejustin/FGI-Tracker">Github Repository</a> will have the most recent updates! </aside>
+        <h1 id="authentication">Authentication</h1>
+        <p>The API will be secured with an API key. As it is still under development, the API can currently be accessed without an API key.</p>
+        <aside class="warning"> Requests will stop working when the API key authentication is implemented. </aside>
+        <h1 id="records">Records</h1>
+        <p>A record represents the value of the Fear Greed Index for a given date.</p>
+        <p>Dates are represented with the format: <code>yyyy-mm-dd</code></p>
+        <aside class="notice"> Data is available starting from when the FGI-Tracker began collecting data. If no record exists for a given date, <code>null</code> will be returned for the value. </aside>
+        <h2 id="get-a-list-of-records">Get a List of Records</h2> <pre class="highlight shell"><code>curl "https://fear-and-greed.leejustin.com/api/fgi/records?start=2017-09-20&amp;end=2017-09-22"</code></pre>
+        <blockquote>
+          <p>The above command returns JSON structured like this:</p>
+        </blockquote> <pre class="highlight json"><code>[  
+   {  
+      <span class="hljs-attr">"date"</span>:<span class="hljs-string">"2017-09-20"</span>,
+      <span class="hljs-attr">"value"</span>:<span class="hljs-number">79</span>
+   },
+   {  
+      <span class="hljs-attr">"date"</span>:<span class="hljs-string">"2017-09-21"</span>,
+      <span class="hljs-attr">"value"</span>:<span class="hljs-number">73</span>
+   },
+   {  
+      <span class="hljs-attr">"date"</span>:<span class="hljs-string">"2017-09-22"</span>,
+      <span class="hljs-attr">"value"</span>:<span class="hljs-number">71</span>
+   }
+]</code></pre>
+        <p>This endpoint returns a list of FGI records in the provided date range.</p>
+        <h3 id="http-request">HTTP Request</h3>
+        <p><code>GET https://fear-and-greed.leejustin.com/api/fgi/records</code></p>
+        <h3 id="query-parameters">Query Parameters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>start</td>
+              <td>false</td>
+              <td>The lower bound of the date range.</td>
+            </tr>
+            <tr>
+              <td>end</td>
+              <td>false</td>
+              <td>The upper bound of the date range.</td>
+            </tr>
+          </tbody>
+        </table>
+        <aside class="success"> Remember — the <code>start</code> and <code>end</code> should be formatted per the <code>Records</code> date format! </aside>
+        <h2 id="get-a-specific-record">Get a Specific Record</h2> <pre class="highlight shell"><code>curl "https://fear-and-greed.leejustin.com/api/fgi/records/2017-10-4"</code></pre>
+        <blockquote>
+          <p>The above command returns JSON structured like this:</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"date"</span>:<span class="hljs-string">"2017-10-04"</span>,
+  <span class="hljs-attr">"value"</span>:<span class="hljs-number">91</span>
+}</code></pre>
+        <p>This endpoint returns the FGI record for given date.</p>
+        <h3 id="http-request">HTTP Request</h3>
+        <p><code>GET https://fear-and-greed.leejustin.com/api/fgi/records/{date}</code></p>
+        <h1 id="errors">Errors</h1>
+        <p>The FGI API uses the following error codes:</p> <pre class="highlight bash"><code></code></pre>
+        <blockquote>
+          <p>400 responses will include an error message like this:</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"message"</span>:<span class="hljs-string">"Invalid date format."</span>
+}</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th>Error Code</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>400</td>
+              <td>Bad Request -- Your request sucks! The JSON response will tell you what&#39;s wrong.</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>Unauthorized -- Your API key is invalid.</td>
+            </tr>
+            <tr>
+              <td>403</td>
+              <td>Forbidden -- The request is reserved for administrators.</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>Not Found -- Make sure your endpoint is correct!</td>
+            </tr>
+            <tr>
+              <td>429</td>
+              <td>Too Many Requests -- You&#39;re making too many requests!</td>
+            </tr>
+            <tr>
+              <td>500</td>
+              <td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dark-box">
+        <div class="lang-selector">
+          <a href="#" data-language-name="shell">shell</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
